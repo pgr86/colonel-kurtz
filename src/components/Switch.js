@@ -39,14 +39,15 @@ export default class Switch extends React.Component {
   }
 
   getNav(blockTypes) {
-    if (!this.state.open) return null
+    if (!this.state.open) {
+      return null
+    }
 
     return (
       <SwitchNav
         ref={el => (this.nav = el)}
         blockTypes={blockTypes}
         onAdd={this._onAdd.bind(this)}
-        onExit={this.close.bind(this)}
       />
     )
   }
@@ -108,9 +109,9 @@ export default class Switch extends React.Component {
     // create that element
     if (types.length === 1) {
       app.push(Actions.create, [types[0].id, position, parent])
+    } else {
+      this.open()
     }
-
-    this.open()
   }
 
   _onKeyUp(e) {

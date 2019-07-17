@@ -18,22 +18,20 @@ export default class ExampleSection extends React.Component {
       {
         id: 'settings',
         label: 'Settings',
-        onClick: this._onSettingsOpen
+        onClick: this._onSettingsOpen.bind(this)
       }
     ]
   }
 
   render() {
-    let { color, openSettings } = this.state
-
     return (
       <div style={{ background: this.props.content.color }}>
         <Section {...this.props} />
         <Dialog
           title="Settings"
           headingComponent="h1"
-          active={openSettings}
-          onExit={this._onSettingsExit}
+          active={this.state.openSettings}
+          onExit={this._onSettingsExit.bind(this)}
         >
           <p>
             You can use dialogs such as these to hide more settings and
@@ -44,7 +42,7 @@ export default class ExampleSection extends React.Component {
             <input
               type="color"
               onChange={this._onColorChange.bind(this)}
-              value={color}
+              value={this.props.content.color}
             />
           </label>
           <footer className="col-dialog-footer">
